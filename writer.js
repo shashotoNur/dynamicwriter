@@ -6,21 +6,21 @@
 */
 
 
-const pause = (time = 1000) =>
+const pause = (time = 0) =>
     {
         return new Promise( (resolve) =>
             {
-                setTimeout(() => { resolve(); }, time);
+                setTimeout(() => { resolve(); }, ( time >= 0 ) ? time : 0);
             });
     };
 
-const logErr = (n, str, i) =>
+const logErr = (numOfArr, str, i) =>
     {
-        const error =
+        const errorTxt =
             [
                 [
                     "\n\twriter() takes a string as first parameter,",
-                    "\n\tand optionally the time perod to log each character."
+                    "\n\tand optionally the time period to log each character."
                 ],
 
                 [
@@ -38,7 +38,7 @@ const logErr = (n, str, i) =>
                 ]
             ]
 
-        var currentErr = error[n];
+        var currentErr = errorTxt[numOfArr];
         process.stdout.write("\n\x1b[31mError: ");
         currentErr.forEach( (element) =>
         {
@@ -48,7 +48,7 @@ const logErr = (n, str, i) =>
 
 const writer = async (str, time = 50) =>
     {
-        if( typeof str === "string" )
+        if( typeof str === "string" && typeof time === "number" )
         {
             const logEachChar = async ( char ) =>
             {
@@ -79,14 +79,14 @@ async function dynamicWriter()
             time = (oneLastCycle) ? 50 
                                : arr[1];
 
-            newStr = str.slice(start, end);
-            await writer(newStr, time);
+            partialStr = str.slice(start, end);
+            await writer(partialStr, time);
             return Promise.resolve();
         }
 
         if( arguments.length > 1 )
         {
-            var str = arguments[0], start, end, time, newStr, oneLastCycle = false;
+            var str = arguments[0], start, end, time, partialStr, oneLastCycle = false;
 
             for(var i = 1; i < ( arguments.length ); i++)
             {

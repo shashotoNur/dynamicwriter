@@ -1,0 +1,18 @@
+{
+  "name": "dynamicwriter",
+  "version": "0.1.0",
+  "description": "Program to log statements to the terminal with typewriter effect",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "typewriter",
+    "terminal",
+    "console"
+  ],
+  "author": "Nurul Aziz",
+  "license": "ISC"
+}
